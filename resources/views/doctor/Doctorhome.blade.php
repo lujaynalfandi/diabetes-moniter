@@ -118,11 +118,11 @@
           @csrf  
         <div class="form-group">
           <label for="Prescription">New Prescription:</label>
-          <textarea class="form-control" cols="50" rows="3" id="Prescription"></textarea>
+          <textarea class="form-control" cols="50" rows="3" name="prescription" id="prescription"></textarea>
         </div> 
         <div class="form-group">
         <label for="Review_Date">Review Date : </label>
-        <input type="date" name="Review_Date" name="Review_Date">
+        <input type="date" id="review_Date" name="review_Date">
       </div> 
      
         <button type="submit" class="btn btn-primary" 

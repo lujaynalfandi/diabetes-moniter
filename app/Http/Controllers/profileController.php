@@ -2,19 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Advice;
 use Illuminate\Http\Request;
-
-class AdviceController extends Controller
+use App\User;
+class profileController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+      $this->middleware('auth'); //If user is not logged in then he can't access this page
+    }
+
     public function index()
     {
-        //
+        return view('profile');
     }
 
     /**
@@ -35,27 +40,16 @@ class AdviceController extends Controller
      */
     public function store(Request $request)
     {
-        if(auth()->user()->type == 'doctor'){
-            $this->validate($request,Advice::validationRules());
-            $advice = new Advice();
-            $advice->user_id =auth()->user()->id;
-            $advice->patient_id = 1;
-            $advice->prescription=$request->input('prescription');
-            $advice->review_Date= $request->input('review_Date');
-            $advice->save();
-
-        }
-        
-
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Advice  $advice
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Advice $advice)
+    public function show($id)
     {
         //
     }
@@ -63,10 +57,10 @@ class AdviceController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Advice  $advice
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Advice $advice)
+    public function edit($id)
     {
         //
     }
@@ -75,21 +69,25 @@ class AdviceController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Advice  $advice
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Advice $advice)
+    public function update(Request $request, $id)
     {
-        //
+        $validatedData = request()->validate(User::validationRules());
+
+        $User = User::whereId($id)->update($validatedData);
+
+      return redirect()->route('profile.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Advice  $advice
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Advice $advice)
+    public function destroy($id)
     {
         //
     }

@@ -12,6 +12,7 @@ use Carbon\Carbon;
 
 class doctorController extends Controller
 {
+   /*
 public function fetch_data(){
 
 $Patients = Patient::where('doctor_id',Auth::user()->id)->get();
@@ -21,6 +22,7 @@ foreach($Patients as $Patient)
 $now = Carbon::now()->format('Y-m-d');
 $Last_Advice = Advice::where(['patient_id'=>$Patient->id,'review_Date'=>$now] 
     )->first();
+
  $Last_Analyses = Analysis::where('patient_id',$Patient->id)
     ->where('created_at','>',$Last_Advice->created_at)->get();
    
@@ -39,15 +41,38 @@ $Last_Advice = Advice::where(['patient_id'=>$Patient->id,'review_Date'=>$now]
 
    
    // return dd($data,$now); 
-
-
-
-
-
 }
     
 }
+*/
+public function fetch_data(){
 
+   $Patients = Patient::where('doctor_id',Auth::user()->id)->get();
+   foreach($Patients as $Patient)
+   {   
+    
+   $now = Carbon::now()->format('Y-m-d');
+   $Last_Advice = Advice::where(['patient_id'=>$Patient->id,'review_Date'=>$now] 
+       )->first();
+       if ( !empty ( $Last_Advice ) ) {
+    $Last_Analyses = Analysis::where('patient_id',$Patient->id)
+       ->where('created_at','>',$Last_Advice->created_at)->get();
+       $Lst_Analyses = $Last_Analyses->toArray(); 
+       $Lst_Advice = $Last_Advice->toArray();
+       $data[]=['id'=>$Patient->id,'birth_date'=>$Patient->birth_date,
+       'gender'=> $Patient->gender,
+       'diabates_type'=>$Patient->diabates_type,
+       'name'=>$Patient->name,'Lst_Advice'=>$Lst_Advice,
+       'Lst_Analyses'=>$Lst_Analyses]; 
+       }
+       $data[]=" ";
+       return  view('doctor.Doctorhome')->with('data',$data); 
+   
+      
+      // return dd($data,$now); 
+   
+   }
+}
 /*public function test_data(){
     $Patients = DB::table('patients')
     ->join('advices', 'users.id', '=', 'advices.user_id')

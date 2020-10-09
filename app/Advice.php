@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Advice extends Model
 {
     protected $fillable = [
-        'prescription','review_Date'
+       'user_id','patient_id', 'prescription','review_Date'
     ];
 
     public static function validationRules()
     {
         return [
             'prescription' => 'required|string',
-            'review_Date' => 'required|date|after:tomorrow',
+            'review_Date' => 'required|date',
         ];
     }
     public function doctor(){

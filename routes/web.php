@@ -38,3 +38,9 @@ Route::get('/test', function () {
 
     Route::get('/home', 'HomeController@index')->middleware('isadmin')->name('home');
     Route::get('/Dhome', 'doctorController@fetch_data')->middleware('isadoctor')->name('Dhome');
+    Route::resource('profile', 'profileController')->middleware('auth');
+
+    Route::get('change-password', 'ChangePasswordController@index')->name('changepass');
+
+Route::post('change-password', 'ChangePasswordController@store')->name('change.password');
+
