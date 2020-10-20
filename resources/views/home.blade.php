@@ -17,7 +17,8 @@
                           <p>All admin uses system</p>
                         </div>
                         <div class="icon">
-                          <i class="fas fa-user-plus"></i>
+                            <i class="fas fa-user"></i>
+                          
                         </div>
                         <a class="small-box-footer" data-toggle="collapse" href="#collapseUser">
                           More info <i class="fas fa-arrow-circle-right"></i>
@@ -39,7 +40,7 @@
                           <p>All doctors</p>
                         </div>
                         <div class="icon">
-                          <i class="fas fa-shopping-cart"></i>
+                            <i class="fas fa-user-md"></i>
                         </div>
                         <a  class="small-box-footer"  data-toggle="collapse" href="#collapseDoctor">
                           More info <i class="fas fa-arrow-circle-right"></i>
@@ -60,7 +61,8 @@
                       <p>All Patient</p>
                     </div>
                     <div class="icon">
-                      <i class="fas fa-shopping-cart"></i>
+                        <i class="fas fa-user-injured"></i>
+                     
                     </div>
                     <a  class="small-box-footer" data-toggle="collapse" href="#collapsePatient">
                       More info <i class="fas fa-arrow-circle-right"></i>

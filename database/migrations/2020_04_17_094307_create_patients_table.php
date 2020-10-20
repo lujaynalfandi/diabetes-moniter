@@ -26,6 +26,9 @@ class CreatePatientsTable extends Migration
             $table->decimal('weight');
             $table->decimal('height');
             $table->enum('state', ['active', 'unactive']);
+            $table->enum('chronic_diseases',['hypertension','heart Disease','bone Diseases','Autoimmune Disease','None of the above']);           
+            $table->string('Allergy_medicine');
+            $table->string('surgery');
             $table->integer('doctor_id')->unsigned();
             $table->foreign('doctor_id')->references('id')->on('users');
             $table->timestamps();

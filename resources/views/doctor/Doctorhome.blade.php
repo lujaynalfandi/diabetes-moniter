@@ -4,7 +4,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Dashboard</div>
+                <div class="card-header"> <h3>Welcom Doctor {{ Auth::user()->name }} </h3></div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -12,8 +12,10 @@
                             {{ session('status') }}
                         </div>
                     @endif
+               
+                    <a type="button" class="btn btn-info btn-lg" href="{{ route("advice.index") }}"> My Advices </a>
+                 
 
-                    You are logged in!
                 </div>
             </div>
         </div>

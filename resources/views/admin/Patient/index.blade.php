@@ -5,8 +5,16 @@
 
 <div class="container">
   <div class="row justify-content-center">
+    <div class="row justify-content-center">
+      <div class="input-container">
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search.."/>
+        <i class="fas fa-search"></i>
+      </div>
+    </div>
     <div class="col-md-14">
-  
+
+      
+      <br/>
       <div class="card card-info">
         <div class="card-header">
           <h3 class="card-title text-xl text-center"> All Patients  </h3>
@@ -14,7 +22,7 @@
         <!-- /.card-header -->
 
 
-        <table class="table text-capitalize">
+        <table class="table text-capitalize table-hover">
             <thead>
                 <tr>
                     <td>ID</td>
@@ -30,7 +38,8 @@
                     <td>Action</td>
                 </tr>
             </thead>
-            @if (count($Patients)>0)
+            <tbody id="myTable">      
+                    @if (count($Patients)>0)
             @foreach ($Patients as $Patient)
                 <tr>
                     <td>{{ $Patient->id }}</td>
@@ -53,7 +62,13 @@
                 
                 </tr>
                 @endforeach
+                <div class="row">
+                  <div class="col-12 d-flex justify-content-center pt-4">
+                  {{ $Patients->links() }}
+                 </div>
+                </div>
             @endif
+          </tbody>
 
             </table>    
             
@@ -64,3 +79,15 @@
 
 
 @stop
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $("#myInput").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#myTable tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
+  </script> 

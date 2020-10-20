@@ -2,11 +2,11 @@
 @section('title', 'Edit user')
 @if (Auth::user()->type === 'admin')
 @section('content')
-<div class="box">
-    <div class="box-header with-border">
-      <h3 class="box-title">User</h3>
+<div class="card card-info">
+  <div class="card-header">
+      <h3 class="card-title">User</h3>
      
-      <div class="box-tools pull-right">
+      <div class="card-tools pull-right">
         @if ($errors->any())
         <div class="alert alert-danger">
             <strong>Warning!</strong> Please check input field code<br><br>
@@ -20,10 +20,10 @@
 
       </div>
 
-      <!-- /.box-tools -->
+      <!-- /.card-tools -->
     </div>
-    <!-- /.box-header -->
-    <div class="box-body">
+    <!-- /.card-header -->
+    <div class="card-body">
 
       <form action="{{ route('users.update',$user->id) }}" method="POST">
         @csrf
@@ -76,6 +76,8 @@
       <a href="{{ route('users.index') }}" class="btn btn-default">
         Cancel
     </a>
+
+
       </form>
 
         </div>

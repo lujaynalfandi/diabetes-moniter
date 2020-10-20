@@ -30,14 +30,17 @@
       </div>
 
       <div class="col-md-4">
-        <div class="card ">
+        <div class="card card-outline card-info">
             <div class="card-header">
               <h3 class="card-title"> <h4 class=" text-center">Medical history </h4></h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
               
-                
+              <p class="text-center "><h5> Other Chronic Diseases : </h5>  {{ $Patient->chronic_diseases }}</p> 
+                <p class="text-center "> <h5>Allergy medicine ? </h5>  {{$Patient->Allergy_medicine }}</p>
+                <p class="text-center "> <h5> had surgery ? </h5> {{ $Patient->surgery }}</p> 
+
             </div>
             <!-- /.card-body -->
             

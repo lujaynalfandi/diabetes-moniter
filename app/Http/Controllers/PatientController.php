@@ -19,11 +19,11 @@ class PatientController extends Controller
     public function index()
     {
         if(auth()->user()->type == 'admin'){
-            $Patients = Patient::all();
+            $Patients = Patient::paginate(10);
             return view('admin.Patient.index')->with('Patients',$Patients);
         }
         else{ 
-            $Patients = Patient::where('doctor_id',auth()->user()->id)->get();
+            $Patients = Patient::where('doctor_id',auth()->user()->id)->paginate(10);
             return view('doctor.Patient.index')->with(['Patients'=>$Patients]);
 
         }
@@ -61,6 +61,9 @@ class PatientController extends Controller
         $patient->weight=55.500;
         $patient->height= 1.66;
         $patient->state= $request->input('state');
+        $patient->chronic_diseases=$request->input('chronic_diseases');
+        $patient->Allergy_medicine=$request->input('Allergy_medicine');
+        $patient->surgery =$request->input('surgery');
         $patient->doctor_id = auth()->user()->id;
         $patient->save();
         return redirect()->route('Patients.index');
@@ -103,10 +106,25 @@ class PatientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validatedData = request()->validate(Patient::validationRules());
 
+        /*$validatedData = request()->validate(Patient::validationRules());
+
+       */
+        $validatedData = $request->validate([
+           'name' => 'required|regex:/^[a-zA-Z\s]+$/u|max:255',
+            /* 'name' => 'required|alpha_|max:55',*/
+            'birth_date' => 'required|date',
+            'gender'=> 'required',
+            'diabetes_type' => 'required|numeric',
+            'injury_year' => 'required|numeric',
+            'phone' => 'required|numeric|unique:patients,phone,'.$id,
+            'email' => 'required|email|unique:patients,email,'.$id,
+            'state' => 'required',
+            'chronic_diseases'=>'required',
+            'Allergy_medicine' => 'required|regex:/(^[A-Za-z0-9 ]+$)+/',
+            'surgery' => 'required|regex:/(^[A-Za-z0-9 ]+$)+/',
+        ]);
         $patient = Patient::whereId($id)->update($validatedData);
-
       return redirect()->route('Patients.index');
     }
 

@@ -13,8 +13,12 @@ class AdviceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
+    {  
+        $Advices = Advice::where('user_id', auth()->user()->id )->paginate(5);
+        return view('admin.user.doctorAdvice')->with('Advices',$Advices);
+
+
+        
     }
 
     /**
@@ -66,9 +70,10 @@ class AdviceController extends Controller
      * @param  \App\Advice  $advice
      * @return \Illuminate\Http\Response
      */
-    public function edit(Advice $advice)
+    public function edit($id)
     {
-        //
+        $advice = Advice::findOrFail($id);
+        return view('admin.user.editAdvice')->with('advice',$advice);
     }
 
     /**
@@ -78,9 +83,13 @@ class AdviceController extends Controller
      * @param  \App\Advice  $advice
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Advice $advice)
+    public function update(Request $request, $id)
     {
-        //
+        $validatedData = request()->validate(Advice::validationRules());
+        $advice = Advice::whereId($id)->update($validatedData);
+      return redirect()->route('advice.index');
+
+        
     }
 
     /**

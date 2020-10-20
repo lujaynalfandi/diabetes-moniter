@@ -66,10 +66,10 @@ public function fetch_data(){
        'Lst_Analyses'=>$Lst_Analyses]; 
        }
        $data[]=" ";
-       return  view('doctor.Doctorhome')->with('data',$data); 
+        return  view('doctor.Doctorhome')->with('data',$data); 
    
       
-      // return dd($data,$now); 
+     // return dd($data,$now); 
    
    }
 }
